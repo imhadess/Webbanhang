@@ -241,6 +241,7 @@
     <Content Include="Views\Store\SPTheodanhmuc.cshtml" />
     <Content Include="Views\Store\Details.cshtml" />
     <Content Include="Views\Nguoidung\Dangky.cshtml" />
+    <Content Include="Views\Nguoidung\Dangnhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

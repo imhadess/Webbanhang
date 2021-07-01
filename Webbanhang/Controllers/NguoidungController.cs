@@ -51,12 +51,13 @@ namespace Webbanhang.Controllers
             {
                 ViewData["Loi5"] = "Email không được để trống";
             }
-            if (String.IsNullOrEmpty(email))
+            if (String.IsNullOrEmpty(dienthoai))
             {
                 ViewData["Loi6"] = "Số điện thoại không được để trống";
             }
             else
             {
+               
                 kh.HoTen = hoten;
                 kh.Taikhoan = tendn;
                 kh.Matkhau = matkhau;
@@ -70,6 +71,35 @@ namespace Webbanhang.Controllers
 
             }
             return this.Dangky();
+        }
+        
+        public ActionResult Dangnhap(FormCollection collection)
+        {
+            var tendn = collection["TenDN"];
+            var matkhau = collection["Matkhau"];
+            if (String.IsNullOrEmpty(tendn))
+            {
+                ViewData["Loi1"] = "Sai tên đăng nhập";
+            }
+            else if (String.IsNullOrEmpty(matkhau))
+            {
+                ViewData["Loi2"] = "Sai mật khẩu";
+            }
+            else
+            {
+                KHACHHANG kh = db.KHACHHANGs.SingleOrDefault(n => n.Taikhoan == tendn && n.Matkhau == matkhau);
+                if(kh != null)
+                {
+                    ViewBag.Thongbao = "Đăng nhập thành công";
+                    Session["Taikhoan"] = kh;
+                }
+                else
+                {
+                    ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
+                }
+            }
+            return View();
+
         }
     }
 }
