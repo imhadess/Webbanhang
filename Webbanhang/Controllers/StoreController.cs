@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Webbanhang.Models;
 
 namespace Webbanhang.Controllers
 {
     public class StoreController : Controller
     {
         // GET: Store
+        //tạo đối tượng chứa toàn bộ csdl từ db
+        dbQLSanphamDataContext data = new dbQLSanphamDataContext();
+        private List<SANPHAM> Layspmoi(int count) 
+        {
+            return data.SANPHAMs.OrderByDescending(a => a.Ngaycapnhat).Take(count).ToList();
+        }
         public ActionResult Index()
         {
-            return View();
+            var spmoi = Layspmoi(3);
+            return View(spmoi);
         }
     }
 }
