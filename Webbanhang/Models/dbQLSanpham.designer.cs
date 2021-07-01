@@ -420,6 +420,8 @@ namespace Webbanhang.Models
 		
 		private System.Nullable<int> _MAHANGSX;
 		
+		private string _HINHSP;
+		
 		private EntitySet<CHITIETDONTHANG> _CHITIETDONTHANGs;
 		
 		private EntityRef<DANHMUCSP> _DANHMUCSP;
@@ -446,6 +448,8 @@ namespace Webbanhang.Models
     partial void OnMADMChanged();
     partial void OnMAHANGSXChanging(System.Nullable<int> value);
     partial void OnMAHANGSXChanged();
+    partial void OnHINHSPChanging(string value);
+    partial void OnHINHSPChanged();
     #endregion
 		
 		public SANPHAM()
@@ -620,6 +624,26 @@ namespace Webbanhang.Models
 					this._MAHANGSX = value;
 					this.SendPropertyChanged("MAHANGSX");
 					this.OnMAHANGSXChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HINHSP", DbType="VarChar(50)")]
+		public string HINHSP
+		{
+			get
+			{
+				return this._HINHSP;
+			}
+			set
+			{
+				if ((this._HINHSP != value))
+				{
+					this.OnHINHSPChanging(value);
+					this.SendPropertyChanging();
+					this._HINHSP = value;
+					this.SendPropertyChanged("HINHSP");
+					this.OnHINHSPChanged();
 				}
 			}
 		}

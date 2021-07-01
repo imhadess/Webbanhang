@@ -21,5 +21,20 @@ namespace Webbanhang.Controllers
             var spmoi = Layspmoi(3);
             return View(spmoi);
         }
+        public ActionResult Danhmuc()
+        {
+            var danhmuc = from dm in data.DANHMUCSPs select dm;
+            return PartialView(danhmuc);
+        }
+        public ActionResult SPTheodanhmuc(int id)
+        {
+            var sanpham = from s in data.SANPHAMs where s.MADM==id select s;
+            return View(sanpham);
+        }
+        public ActionResult Details(int id)
+        {
+            var sanpham = from s in data.SANPHAMs where s.MaSP == id select s;
+            return View(sanpham.Single());
+        }
     }
 }
