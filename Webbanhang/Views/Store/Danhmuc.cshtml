@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Webbanhang.Models.DANHMUCSP>
+
 @foreach (var item in Model)
 {
     <a href="@Url.Action("SPTheodanhmuc","Store", new { id = item.MADM })">@item.TENDM</a>
