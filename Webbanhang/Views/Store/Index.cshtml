@@ -1,4 +1,7 @@
-﻿
+﻿@using Webbanhang.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<SANPHAM>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -324,3 +327,13 @@
     </div>
 </div>
 <!-- jewellery  section end -->
+@* tao lien ket cac trang *@
+Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount;
+<div class="MenuTrang">
+    @Html.PagedListPager(Model,page=>Url.Action("Index",new {page=page}))
+</div>
+<style>
+    .MenuTrang li{
+        display:inline;
+    }
+</style>
