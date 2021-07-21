@@ -162,8 +162,6 @@ namespace Webbanhang.Models
 		
 		private System.Nullable<System.DateTime> _Ngaysinh;
 		
-		private EntitySet<DONDATHANG> _DONDATHANGs;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -188,7 +186,6 @@ namespace Webbanhang.Models
 		
 		public ADMIN()
 		{
-			this._DONDATHANGs = new EntitySet<DONDATHANG>(new Action<DONDATHANG>(this.attach_DONDATHANGs), new Action<DONDATHANG>(this.detach_DONDATHANGs));
 			OnCreated();
 		}
 		
@@ -352,19 +349,6 @@ namespace Webbanhang.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ADMIN_DONDATHANG", Storage="_DONDATHANGs", ThisKey="MAADMIN", OtherKey="MAADMIN")]
-		public EntitySet<DONDATHANG> DONDATHANGs
-		{
-			get
-			{
-				return this._DONDATHANGs;
-			}
-			set
-			{
-				this._DONDATHANGs.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -383,18 +367,6 @@ namespace Webbanhang.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_DONDATHANGs(DONDATHANG entity)
-		{
-			this.SendPropertyChanging();
-			entity.ADMIN = this;
-		}
-		
-		private void detach_DONDATHANGs(DONDATHANG entity)
-		{
-			this.SendPropertyChanging();
-			entity.ADMIN = null;
 		}
 	}
 	
@@ -1138,8 +1110,6 @@ namespace Webbanhang.Models
 		
 		private EntitySet<CHITIETDONTHANG> _CHITIETDONTHANGs;
 		
-		private EntityRef<ADMIN> _ADMIN;
-		
 		private EntityRef<KHACHHANG> _KHACHHANG;
 		
     #region Extensibility Method Definitions
@@ -1165,7 +1135,6 @@ namespace Webbanhang.Models
 		public DONDATHANG()
 		{
 			this._CHITIETDONTHANGs = new EntitySet<CHITIETDONTHANG>(new Action<CHITIETDONTHANG>(this.attach_CHITIETDONTHANGs), new Action<CHITIETDONTHANG>(this.detach_CHITIETDONTHANGs));
-			this._ADMIN = default(EntityRef<ADMIN>);
 			this._KHACHHANG = default(EntityRef<KHACHHANG>);
 			OnCreated();
 		}
@@ -1305,10 +1274,6 @@ namespace Webbanhang.Models
 			{
 				if ((this._MAADMIN != value))
 				{
-					if (this._ADMIN.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnMAADMINChanging(value);
 					this.SendPropertyChanging();
 					this._MAADMIN = value;
@@ -1328,40 +1293,6 @@ namespace Webbanhang.Models
 			set
 			{
 				this._CHITIETDONTHANGs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ADMIN_DONDATHANG", Storage="_ADMIN", ThisKey="MAADMIN", OtherKey="MAADMIN", IsForeignKey=true)]
-		public ADMIN ADMIN
-		{
-			get
-			{
-				return this._ADMIN.Entity;
-			}
-			set
-			{
-				ADMIN previousValue = this._ADMIN.Entity;
-				if (((previousValue != value) 
-							|| (this._ADMIN.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ADMIN.Entity = null;
-						previousValue.DONDATHANGs.Remove(this);
-					}
-					this._ADMIN.Entity = value;
-					if ((value != null))
-					{
-						value.DONDATHANGs.Add(this);
-						this._MAADMIN = value.MAADMIN;
-					}
-					else
-					{
-						this._MAADMIN = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("ADMIN");
-				}
 			}
 		}
 		

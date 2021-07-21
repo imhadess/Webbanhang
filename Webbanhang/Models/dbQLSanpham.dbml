@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLWEBBANGHANG" Class="dbQLSanphamDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-2021OOH;Initial Catalog=QLWEBBANGHANG;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLWEBBANGHANGConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-U63A5K0F\LOCAL;Initial Catalog=QLWEBBANGHANG;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLWEBBANGHANGConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ADMIN" Member="ADMINs">
     <Type Name="ADMIN">
       <Column Name="MAADMIN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -10,7 +10,6 @@
       <Column Name="DiachiKH" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="DienthoaiKH" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Ngaysinh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="ADMIN_DONDATHANG" Member="DONDATHANGs" ThisKey="MAADMIN" OtherKey="MAADMIN" Type="DONDATHANG" />
     </Type>
   </Table>
   <Table Name="dbo.SANPHAM" Member="SANPHAMs">
@@ -57,7 +56,6 @@
       <Column Name="MaKH" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MAADMIN" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="DONDATHANG_CHITIETDONTHANG" Member="CHITIETDONTHANGs" ThisKey="MADH" OtherKey="MADH" Type="CHITIETDONTHANG" />
-      <Association Name="ADMIN_DONDATHANG" Member="ADMIN" ThisKey="MAADMIN" OtherKey="MAADMIN" Type="ADMIN" IsForeignKey="true" />
       <Association Name="KHACHHANG_DONDATHANG" Member="KHACHHANG" ThisKey="MaKH" OtherKey="MaKH" Type="KHACHHANG" IsForeignKey="true" />
     </Type>
   </Table>

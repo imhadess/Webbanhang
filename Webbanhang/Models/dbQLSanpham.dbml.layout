@@ -65,13 +65,6 @@
         <classShapeMoniker Id="6a3aa8d8-86d3-4774-a9a6-0d236b0db876" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 2.07774983723958); (3.5 : 2.07774983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbQLSanphamDataContext/ADMIN/ADMIN_DONDATHANG" />
-      <nodes>
-        <classShapeMoniker Id="214fffc7-6116-4af4-bb55-59b15c527d7b" />
-        <classShapeMoniker Id="324b37c4-c6fe-4de5-b9ee-4125556ad872" />
-      </nodes>
-    </associationConnector>
     <associationConnector edgePoints="[(2.75 : 10.8950512695312); (3.5 : 10.8950512695312)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/dbQLSanphamDataContext/HANGSX/HANGSX_SANPHAM" />
       <nodes>
@@ -79,7 +72,7 @@
         <classShapeMoniker Id="ff58e8ef-2b2a-44f8-ad6d-9dcbe62d8f3f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.875 : 6.17390055338542); (4.6875005 : 6.17390055338542); (4.6875005 : 3.15549967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.875 : 6.17390055338542); (4.6875005 : 6.17390055338542); (4.6875005 : 3.15549967447917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/dbQLSanphamDataContext/KHACHHANG/KHACHHANG_DONDATHANG" />
       <nodes>
         <classShapeMoniker Id="429ba93a-508a-43db-a3e1-aa154f4165b8" />
