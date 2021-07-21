@@ -28,7 +28,7 @@ namespace Webbanhang.Controllers
             }
             else
             {
-                ADMIN ad = db.ADMINs.SingleOrDefault(n => n.taikhoan == tendn && n.matkhau == matkhau);
+                ADMIN ad = db.ADMINs.SingleOrDefault(n => n.Taikhoan == tendn && n.Matkhau == matkhau);
                 if (ad != null)
                 {
                     Session["Taikhoanadmin"] = ad;
