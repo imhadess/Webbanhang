@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using Webbanhang.Models;
 
+using PagedList;
+using PagedList.Mvc;
+
 namespace Webbanhang.Controllers
 {
     public class StoreController : Controller
@@ -16,10 +19,13 @@ namespace Webbanhang.Controllers
         {
             return data.SANPHAMs.OrderByDescending(a => a.Ngaycapnhat).Take(count).ToList();
         }
-        public ActionResult Index()
+        public ActionResult Index(int ? page)
         {
-            var spmoi = Layspmoi(3);
-            return View(spmoi);
+            int pageSize = 5;
+            int pageNum = (page ?? 1);
+
+            var spmoi = Layspmoi(15);
+            return View(spmoi.ToPagedList(pageNum,pageSize));
         }
         public ActionResult Danhmuc()
         {
