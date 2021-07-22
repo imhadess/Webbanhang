@@ -1,0 +1,105 @@
+﻿@using Webbanhang.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<SANPHAM>
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>...</text>
+    }
+}
+
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>QUẢN LÝ THÔNG TIN SẢN PHẨM</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Themmoisanpham")
+</p>
+<table class="table">
+    <tr>
+        <th width=" 200">
+            Tên sản phẩm
+        </th>
+        <th width=" 100">
+            Giá sản phẩm
+        </th>
+        <th width=" 300">
+            Mô tả
+        </th>
+        <th width=" 120">
+            Hình sản phẩm
+        </th>
+        <th width=" 150">
+            Ngày cập nhật
+        </th>
+        <th width=" 120">
+            Số lượng tồn
+        </th>
+        <th width=" 50">
+            Danh mục
+        </th>
+        <th width=" 120">
+            Mã hãng sản xuất
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TENSP)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GIASP)
+    </td>
+    <td>
+        @Truncate(item.MOTASP, 100)
+    </td>
+    <td>
+        <img src="~/images/@item.HINHSP" width=" 70">
+        @Html.DisplayFor(modelItem => item.HINHSP)
+    </td>
+    <td>
+        @String.Format("{0:dd/MM/yyyy}",item.Ngaycapnhat)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Soluongton)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DANHMUCSP.TENDM)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HANGSX.TENHANG)
+    </td>
+
+    <td width=" 150">
+        @Html.ActionLink("Sửa", "Suasanpham", new { id = item.MaSP }) |
+        @Html.ActionLink("Chi tiết", "Chitietsanpham", new { id = item.MaSP }) |
+        @Html.ActionLink("Xóa", "Xoasanpham", new { id = item.MaSP })
+    </td>
+</tr>
+    }
+
+</table>
+@* Tao liên kết các trang  *@
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount;
+<div class="MenuTrang">
+
+    @Html.PagedListPager(Model, page => Url.Action("Sanpham", new { page = page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>

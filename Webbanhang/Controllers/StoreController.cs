@@ -17,7 +17,7 @@ namespace Webbanhang.Controllers
         dbQLSanphamDataContext data = new dbQLSanphamDataContext();
         private List<SANPHAM> Layspmoi(int count) 
         {
-            return data.SANPHAMs.OrderByDescending(a => a.Ngaycapnhat).Take(count).ToList();
+            return data.SANPHAMs.OrderByDescending(n => n.Ngaycapnhat).Take(count).ToList();
         }
         public ActionResult Index(int ? page)
         {
