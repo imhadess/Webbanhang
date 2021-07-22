@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Webbanhang.Models;
 using PagedList;
 using PagedList.Mvc;
-
+using System.Data.Entity;
 
 namespace Webbanhang.Controllers
 {
@@ -25,6 +25,7 @@ namespace Webbanhang.Controllers
                 return RedirectToAction("Login", "Admin");
 
         }
+        // Dang nhap Admin
         [HttpGet]
         public ActionResult Login()
         {
@@ -33,6 +34,7 @@ namespace Webbanhang.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
+            // Gán các giá trị người dùng nhập liệu cho các biến 
             var tendn = collection["username"];
             var matkhau = collection["password"];
             if (String.IsNullOrEmpty(tendn))
@@ -45,6 +47,7 @@ namespace Webbanhang.Controllers
             }
             else
             {
+                //Gán giá trị cho đối tượng được tạo mới (ad) 
                 ADMIN ad = db.ADMINs.SingleOrDefault(n => n.Taikhoan == tendn && n.Matkhau == matkhau);
                 if (ad != null)
                 {
@@ -88,7 +91,7 @@ namespace Webbanhang.Controllers
 
             //Dua du lieu vao dropdownload
             ViewBag.MADM = new SelectList(db.DANHMUCSPs.ToList().OrderBy(n => n.TENDM), "MADM", "TENDM");
-            ViewBag.MaHSX = new SelectList(db.HANGSXes.ToList().OrderBy(n => n.TENHANG), "MaHANGSX", "TENHANG");
+            ViewBag.MaHANGSX = new SelectList(db.HANGSXes.ToList().OrderBy(n => n.TENHANG), "MAHANGSX", "TENHANG");
             //Kiem tra duong dan file
             if (fileUpload == null)
             {
@@ -138,7 +141,7 @@ namespace Webbanhang.Controllers
                 return View(sanpham);
             }
         }
-        //4. Xóa 1 Quyển sách 
+        //4. Xóa 1 san pham 
         [HttpGet]
         public ActionResult Xoasanpham(int id)
         {
@@ -163,7 +166,7 @@ namespace Webbanhang.Controllers
                 return RedirectToAction("Sanpham", "Admin");
             }
         }
-        //3. xem chi tiet
+        //5. sua san pham
         public ActionResult Suasanpham(int id)
         {
             if (Session["TaikhoanAdmin"] == null)
@@ -180,8 +183,8 @@ namespace Webbanhang.Controllers
                 }
                 //Dua du lieu vao dropdownList
                 //Lay ds tu tabke chu de, sắp xep tang dan trheo ten chu de, chon lay gia tri Ma CD, hien thi thi Tenchude
-                ViewBag.MADM = new SelectList(db.DANHMUCSPs.ToList().OrderBy(n => n.TENDM), "MADM", "TENDM");
-                ViewBag.MaHSX = new SelectList(db.HANGSXes.ToList().OrderBy(n => n.TENHANG), "MaHANGSX", "TENHANG");            
+                ViewBag.MADM = new SelectList(db.DANHMUCSPs.ToList().OrderBy(n => n.TENDM), "MADM", "TENDM", sanpham.MADM);
+                ViewBag.MAHANGSX = new SelectList(db.HANGSXes.ToList().OrderBy(n => n.TENHANG), "MAHANGSX", "TENHANG", sanpham.MAHANGSX);            
                 return View(sanpham);
             }
         }
@@ -192,7 +195,7 @@ namespace Webbanhang.Controllers
 
             //Dua du lieu vao dropdownload
             ViewBag.MADM = new SelectList(db.DANHMUCSPs.ToList().OrderBy(n => n.TENDM), "MADM", "TENDM");
-            ViewBag.MaHANGSX = new SelectList(db.HANGSXes.ToList().OrderBy(n => n.TENHANG), "MaHANGSX", "TENHANG");
+            ViewBag.MAHANGSX = new SelectList(db.HANGSXes.ToList().OrderBy(n => n.TENHANG), "MAHANGSX", "TENHANG");
             //Kiem tra duong dan file
             if (fileUpload == null)
             {
@@ -218,7 +221,7 @@ namespace Webbanhang.Controllers
                     }
                     sanpham.HINHSP = fileName;
                     //Luu vao CSDL
-                    db.SANPHAMs.InsertOnSubmit(sanpham);
+                    UpdateModel(sanpham);
                     db.SubmitChanges();
                 }
                 return RedirectToAction("Sanpham", "Admin");
