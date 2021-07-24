@@ -21,10 +21,10 @@ namespace Webbanhang.Controllers
         }
         public ActionResult Index(int ? page)
         {
-            int pageSize = 5;
+            int pageSize = 9;
             int pageNum = (page ?? 1);
 
-            var spmoi = Layspmoi(15);
+            var spmoi = Layspmoi(12);
             return View(spmoi.ToPagedList(pageNum,pageSize));
         }
         public ActionResult Danhmuc()
